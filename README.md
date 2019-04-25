@@ -1,5 +1,5 @@
 # newretail-admin-web
-趣闸后台管理系统的前端项目，基于Vue + Element实现。主要包括商品管理，订单管理，会员管理，促销管理，运营管理，内容管理，统计报表，财务管理，权限管理，设置等功能。
+趣闸后台管理系统的前端项目，基于Vue + Element实现。主要包括设备管理，货道管理，场地管理，库存管理，广告管理，商品管理，权限管理，财务管理，权限管理，分润管理 销售订单 财务等功能。
 
 ## 登录 
 <img src="https://raw.githubusercontent.com/liuwkgithub/newretail-admin-web/master/src/assets/images/login.png"  alt=""/>
