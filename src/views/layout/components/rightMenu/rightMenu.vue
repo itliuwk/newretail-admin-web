@@ -18,7 +18,7 @@
                     class="avtarWrapper"
                     slot="reference"
             >
-                <span class="text">{{this.$store.state.user.user}}</span>
+                <span class="text">{{this.$store.state.user.user || user}}</span>
                 <div class="avatarContainer">
                     <img
                             :src="logoSrc"
@@ -32,11 +32,17 @@
 </template>
 <script>
     import logoSrc from '@/assets/quxia.png'
+    import { getCookie } from "../../../../utils/cookie";
     export default {
         data(){
           return{
-              logoSrc:logoSrc
+              logoSrc:logoSrc,
+              user:''
           }
+        },
+        mounted(){
+         let LoginByUsername =  getCookie('LoginByUsername');
+            this.user = JSON.parse(LoginByUsername).username
         },
         methods: {
             getCookie(name) {

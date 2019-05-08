@@ -1,19 +1,8 @@
 <template>
     <div>
         <form-container label="分类名称" @submit="submitForm" @resetForm="resetForm"></form-container>
-
-        <el-row :gutter="20">
-            <el-col :span="10"><div class="grid-content bg-purple">
-                <classification :params="params" @currId="currId" @products="products" :success="refresh"></classification>
-            </div></el-col>
-            <el-col :span="14"><div class="grid-content bg-purple-light">
-                <classification-list :classifyId="classifyId" :productsCount="productsCount" @$success="refreshList"></classification-list>
-            </div></el-col>
-        </el-row>
-
-
-
-
+        <classification :params="params" @currId="currId" @products="products" :success="refresh"></classification>
+        <classification-list :classifyId="classifyId" :productsCount="productsCount" @$success="refreshList"></classification-list>
     </div>
 </template>
 
@@ -23,7 +12,7 @@
     const Classification = () => import('./classification.vue');
     const ClassificationList = () => import('./classificationList.vue');
     export default {
-        name: "commodityClassification",
+        name: "commodityClassification1",
         data() {
             return {
                 refresh: 0,

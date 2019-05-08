@@ -116,7 +116,7 @@
                 GET_ORDER_LIST(this.params).then(res => {
                     let lists = res.map((item) => {
                         item.state = item.state == "COMPLETED" ? "支付成功" : "支付失败";
-                        item.paymentGatewayType = item.paymentGatewayType == "wx" ? "微信" : "支付宝";
+                        item.paymentGatewayType = item.paymentGatewayType.toLocaleLowerCase() == "wx" ? "微信" : "支付宝";
                         item.createdDate = moment(item.createdDate).format('YYYY-MM-DD HH:mm:ss');
                         return item;
                     });

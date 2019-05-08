@@ -54,6 +54,13 @@ export function dateTimeFormateHHmm(date) {
 
 }
 
+
+export function FormateYYMMDD(date) {
+  return moment(date).format('YYYY-MM-DD')
+
+}
+
+
 export function clone(valu) {
   return JSON.parse(JSON.stringify(valu))
 }

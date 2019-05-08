@@ -21,10 +21,6 @@
                         label="商品名称">
                 </el-table-column>
                 <el-table-column
-                        prop="price"
-                        label="价格">
-                </el-table-column>
-                <el-table-column
                         prop="costPrice"
                         label="成本价">
                 </el-table-column>
@@ -208,7 +204,7 @@
 <style rel="stylesheet/scss" lang="scss" scoped>
     .table {
         margin-top: 20px;
-        padding: 20px;
+        padding: 30px;
         background: #fff;
 
         .option-span {

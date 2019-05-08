@@ -25,6 +25,25 @@ export function GET_LOCATIONS(params) {
     }).then(res => res.data.data)
 }
 
+
+export function GET_COUPONS(params) {
+    return request({
+        url: "/api/admin/coupons/select",
+        method: 'get',
+        params
+    }).then(res => res.data.data)
+}
+
+
+export function GET_VIPVARDS(params) {
+    return request({
+        url: "/api/admin/vipCards/select",
+        method: 'get',
+        params
+    }).then(res => res.data.data)
+}
+
+
 export function GET_ROLES(params) {
     return request({
         url: "/api/admin/roles/select",

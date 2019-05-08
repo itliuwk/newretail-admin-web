@@ -105,7 +105,6 @@ export default {
   },
   created() {
     // window.addEventListener('hashchange', this.afterQRScan)
-    //  https://quxiaapi.renqilai.com
   },
   destroyed() {
     // window.removeEventListener('hashchange', this.afterQRScan)
@@ -129,6 +128,7 @@ export default {
               if (access_token) {
                 setCookie("access_token", access_token);
                 this.$store.state.user.user = this.loginForm.username;
+                setCookie("LoginByUsername", JSON.stringify(this.loginForm));
                 this.$router.push({
                   path: this.redirect || "/dashboard/index"
                 });
