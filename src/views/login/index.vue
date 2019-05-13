@@ -78,8 +78,8 @@ export default {
     };
     return {
       loginForm: {
-        username: "test",
-        password: "123456"
+        username: "",
+        password: ""
       },
       loginRules: {
         username: [
@@ -133,13 +133,13 @@ export default {
                   path: this.redirect || "/dashboard/index"
                 });
               } else {
-                myalert.fail("账号密码不对");
+                myalert.fail("账号或密码不正确!");
               }
             })
             .catch(e => {
               setCookie("access_token", null);
               this.loading = false;
-              myalert.fail("账号密码不对");
+              myalert.fail("账号或密码不正确!");
               console.error(e);
             });
         } else {

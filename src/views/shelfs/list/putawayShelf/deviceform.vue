@@ -102,7 +102,6 @@ export default {
     async getDeviceList() {
       var { activeDevices, devices } = await GET_DEVICES_NUM(this.formData);
       var result2 = await GET_DEVICE_LISTS(this.formData);
-      debugger;
     },
     applyPost() {
       var self = this;

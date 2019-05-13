@@ -223,9 +223,11 @@ export default {
     sureAddModal() {
       var self = this;
       var $addmodal = this.$refs["addmodalContainer"].$refs["form"];
+
       $addmodal.validate(valid => {
         if (valid) {
           self.$data.addModal = false;
+
           self.addDeviceGroup({ ...$addmodal.model }).then(res => {
             if (res.success) {
               myalert.success.call(self, "保存成功");
@@ -262,7 +264,6 @@ export default {
     },
     go2addDevice(row) {
       var self = this;
-
       var params = {
         // groupId: row.id,
         // group: row,

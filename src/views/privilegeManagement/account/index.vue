@@ -27,7 +27,11 @@
                 </el-table-column>
                 <el-table-column
                         prop="mobile"
-                        label="手机">
+                        label="联系方式">
+                </el-table-column>
+                <el-table-column
+                        prop="clientName"
+                        label="所属组织">
                 </el-table-column>
                 <el-table-column
                         prop="state"
@@ -114,7 +118,7 @@
     import Alert from "@/utils/alert";
     import {pageSize} from '../../../config';
 
-    const FormContainer = () => import('../form.vue');
+    const FormContainer = () => import('./form.vue');
 
     export default {
         name: "productList",

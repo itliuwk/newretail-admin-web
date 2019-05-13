@@ -52,7 +52,7 @@
           background
           layout="prev, pager, next"
           :current-page="page"
-           :page-size="size"
+          :page-size="size"
           :total="parseInt(list_total)"
           @current-change="currentChange"
         ></el-pagination>
@@ -143,14 +143,23 @@ export default {
       var $addmodal = this.$refs["addmodalContainer"].$refs["form"];
       $addmodal.validate(valid => {
         if (valid) {
-          self.$data.addModal = false;
-          self.addDeivce().then(res => {
-            if (res.success) {
-              myalert.success.call(this, "保存成功");
-            } else {
-              myalert.fail.call(this, res.message);
-            }
-          });
+          self
+            .addDeivce()
+            .then(res => {
+              if (res.success) {
+                self.$data.addModal = false;
+                myalert.success("保存成功");
+              } else {
+                self.$data.addModal = true;
+                // res.message.message
+                myalert.fail("设备id冲突，请填写其它id");
+              }
+            })
+            .catch(e => {
+              self.$data.addModal = true;
+              // res.message.message
+              myalert.fail("设备id冲突，请填写其它id");
+            });
         } else {
           self.$data.addModal = true;
         }

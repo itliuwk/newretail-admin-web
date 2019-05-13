@@ -10,7 +10,7 @@
     >
       <div>
         <el-form-item label="设备类型" prop="type" :rules="[  { required: true, message: '不能为空'}, ]">
-          <el-select v-model="dataForm.type" placeholder="设备类型">
+          <el-select v-model="dataForm.type" placeholder="设备类型" :disabled="true">
             <el-option
               :key="item.id"
               v-for="item in deviceGroups"

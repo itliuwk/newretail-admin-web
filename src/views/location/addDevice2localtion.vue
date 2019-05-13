@@ -129,7 +129,6 @@ export default {
       this.lists.map(item => {
         this.selectArray.map(item2 => {
           if (item2.id == item.id) {
-            debugger;
             item.checked = true;
           }
         });

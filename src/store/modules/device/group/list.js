@@ -102,7 +102,6 @@ const Store = {
                 return { success: false, message: e }
             })
             //更新 list
-            debugger
             var _params = { ...state.params, ...state.page }
             dispatch("getDeviceGroups", _params)
             commit('RESET_ADD_MODAL_PARAMS')

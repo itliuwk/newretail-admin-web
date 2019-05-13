@@ -99,9 +99,7 @@ const store = {
             dispatch("getDeviceList", params)
         },
         addDeivce: async ({ commit, state, dispatch }, params) => {
-            var data = await ADD_DEVICE(state.addParams).catch(e => {
-                return { success: false, message: e }
-            })
+            var data = await ADD_DEVICE(state.addParams)
             //更新 list
             var _params = { ...state.params, ...state.page }
             dispatch("getDeviceList", _params)
