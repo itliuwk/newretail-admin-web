@@ -18,8 +18,14 @@
           >{{scope.row.name}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="货道数" prop="shelfCount"></el-table-column>
-      <el-table-column label="设备数" prop="devices"></el-table-column>
+      <el-table-column label="货道数" width="80" prop="shelfCount"></el-table-column>
+      <el-table-column label="设备数" width="80"  prop="devices"></el-table-column>
+      <el-table-column label="类型"  width="100" prop="typeId">
+        <template slot-scope="scope">
+          <div v-if="scope.row.deviceTypeId=='quxia'">酒店售货机</div>
+          <div v-else="!scope.row.deviceTypeId=='quxia-vm'">自助售货机</div>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" width="120">
         <template slot-scope="scope">
           <el-button

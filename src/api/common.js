@@ -78,3 +78,13 @@ export function GET_LOCALTION_TYPE(params) {
         params
     }).then(res => res.data.data)
 }
+
+
+
+export function GET_clientsSel(params) {
+    return request({
+        url: "/api/admin/clients/select",
+        method: 'get',
+        params
+    }).then(res => res.data.data)
+}

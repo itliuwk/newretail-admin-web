@@ -38,6 +38,10 @@
                         label="账号状态">
                 </el-table-column>
                 <el-table-column
+                        prop="createdDate"
+                        label="创建时间">
+                </el-table-column>
+                <el-table-column
                         fixed="right"
                         label="操作"
                 >
@@ -115,8 +119,11 @@
         DISABLE_ACCOUNT_LIST
     } from '@/api/privilegeManagement'
 
+    import {GET_clientsSel} from '@/api/common'
+
     import Alert from "@/utils/alert";
     import {pageSize} from '../../../config';
+    import {dateTimeFormate} from "@/filters/index";
 
     const FormContainer = () => import('./form.vue');
 
@@ -142,6 +149,10 @@
             }
         },
         mounted() {
+            this.params={
+                ...this.params,
+                clientId:this.$route.query.clientId
+            };
             this.getList();
             this.getCount();
         },
@@ -157,6 +168,7 @@
                 GET_ACCOUNT_LIST(this.params).then(res => {
                     res.map((item) => {
                         item.state = item.enabled == true ? '启用' : '禁用';
+                        item.createdDate = dateTimeFormate(item.createdDate);
                         return item
                     });
                     this.lists = res
@@ -168,7 +180,7 @@
              * 获取总数
              */
             getCount() {
-                COUNT_ACCOUNT_LIST().then(res => {
+                COUNT_ACCOUNT_LIST(this.$route.query.clientId).then(res => {
                     this.count = res
                 });
             },
@@ -177,9 +189,11 @@
              * 查询
              */
             submitForm(res) {
+                console.log(res);
                 this.params = {
                     ...this.params,
-                    query: res.name
+                    query: res.name,
+                    clientId: res.clientId
                 };
                 this.getList()
             },
@@ -191,7 +205,8 @@
                 this.params = {
                     from: 0,
                     size: pageSize,
-                    query: ''
+                    query: '',
+                    clientId: ''
                 };
                 this.getList()
             },

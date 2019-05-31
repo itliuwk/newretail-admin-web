@@ -62,6 +62,8 @@ const tagsView = {
       state.cachedViews = []
     },
 
+
+
     UPDATE_VISITED_VIEW: (state, view) => {
       for (let v of state.visitedViews) {
         if (v.path === view.path) {

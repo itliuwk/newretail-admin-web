@@ -27,7 +27,8 @@ export function getToday() {
         start: a,
         end: a,
         laststart: b,
-        lastend: b
+        lastend: b,
+        siez:10
     }
 }
 export function getLastWeek() {
@@ -36,6 +37,7 @@ export function getLastWeek() {
         end: moment().endOf('isoWeek').format('YYYY-MM-DD'),
         laststart: moment().add(-1, 'weeks').startOf('isoWeek').format('YYYY-MM-DD'),
         lastend: moment().add(-1, 'weeks').startOf('isoWeek').format('YYYY-MM-DD'),
+        siez:10
     }
 }
 
@@ -45,5 +47,6 @@ export function getLastMonth() {
         end: moment().endOf('months').format('YYYY-MM-DD'),
         laststart: moment().add(-1, 'months').startOf('isoWeek').format('YYYY-MM-DD'),
         lastend: moment().add(-1, 'months').startOf('isoWeek').format('YYYY-MM-DD'),
+        siez:10
     }
 }

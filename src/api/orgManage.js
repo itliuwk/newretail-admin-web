@@ -15,6 +15,9 @@ export function GET_clients(params) {
     }).then(res => res.data.data)
 }
 
+
+
+
 /**
  * 组织管理 --  新建组织
  * @param params
@@ -30,14 +33,14 @@ export function POST_clients(params) {
 }
 
 /**
- * 组织管理 --  新建组织
+ * 组织管理 --  更新组织
  * @param params
  * @returns {Q.Promise<any>}
  * @constructor
  */
 export function PUT_clients(params) {
     return request({
-        url: "/api/admin/clients",
+        url: "/api/admin/clients?id=" + params.id,
         method: 'put',
         data: params
     }).then(res => res.data.data)

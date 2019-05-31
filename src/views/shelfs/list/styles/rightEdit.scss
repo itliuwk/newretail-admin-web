@@ -1,0 +1,62 @@
+.header1 {
+    display    : flex;
+    align-items: flex-end;
+    padding    : 10px;
+
+    h2 {}
+
+    .el-input-number {
+        margin-right: 10px;
+        margin-left : 10px;
+    }
+}
+
+.header1.header-big {
+    border-bottom: 1px solid #ddd;
+}
+
+.row-content-container {
+    display  : flex;
+    flex-wrap: wrap;
+    padding  : 0 10px;
+
+    .listItem {
+        width       : calc(33.33%-20px);
+        margin-right: 20px;
+    }
+}
+
+
+
+.header-big {
+    align-items: center;
+
+    .content-wrapper {
+        display      : flex;
+        align-items  : flex-end;
+        padding-right: 10px;
+
+        h2 {}
+
+        .el-input-number {
+            margin-right: 10px;
+            margin-left : 10px;
+        }
+
+        .right-btns {
+            .check-btn {}
+        }
+    }
+}
+
+// 小售货机
+.row-container.small {
+    display  : flex;
+    flex-wrap: wrap;
+    padding  : 10px;
+
+    .listItem {
+        width       : calc(33.33%-20px);
+        margin-right: 20px;
+    }
+}

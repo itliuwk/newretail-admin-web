@@ -5,7 +5,12 @@
                 <el-input v-model="formInline.name" placeholder="名称搜索"></el-input>
             </el-form-item>
             <el-form-item label="组织搜索">
-                <el-input v-model="formInline.name" placeholder="组织搜索"></el-input>
+                <el-cascader
+                        :options="options"
+                        v-model="selectOptionValue"
+                        change-on-select
+                        clearable
+                ></el-cascader>
             </el-form-item>
             <el-form-item style="padding-left:30px">
                 <el-button type="default" @click="resetForm1('formInline')">重置</el-button>
@@ -16,16 +21,45 @@
 </template>
 
 <script>
+
+    import {GET_clientsSel} from '@/api/common'
+
     export default {
         name: 'form-container',
-        props:['label'],
+        props: ['label'],
         data() {
             return {
                 formInline: {
-                    name: ''
-                }
+                    name: '',
+                    clientId: ''
+                },
+                selectOptionValue: [],
+                options: []
             }
         },
+        mounted() {
+            let that = this;
+            GET_clientsSel().then(res => {
+                this.options = JSON.parse(JSON.stringify(res).replace(/id/g, 'value').replace(/name/g, 'label').replace(/subs/g, 'children'));
+
+
+                setTimeout(() => {
+                    let ids = [];
+
+                    for (var i = 0; i < this.options.length; i++) {
+                        that.findNodePath(ids, this.options[i], parseInt(this.$route.query.clientId));
+                    }
+                    this.selectOptionValue = ids;
+                }, 100)
+            })
+        },
+        watch: {
+            selectOptionValue: function (newValue) {
+                this.formInline.clientId = newValue[newValue.length - 1];
+            }
+        },
+
+
         methods: {
             onSubmit() {
                 this.$emit('submit', this.formInline)
@@ -34,8 +68,28 @@
                 this.formInline = {
                     name: ''
                 };
+                this.selectOptionValue = []
                 this.$emit('resetForm');
 
+            },
+            findNodePath(parentIds, node, targetId) {
+                if (node.value === targetId) {
+                    parentIds.push(targetId);
+                    return parentIds;
+                }
+                if (node.children && node.children.length > 0) {
+
+                    parentIds.push(node.value);
+
+                    for (let i = 0; i < node.children.length; i++) {
+                        let sub = node.children[i];
+                        let result = this.findNodePath(parentIds, sub, targetId);
+                        if (result) {
+                            return parentIds;
+                        }
+                    }
+                    parentIds.splice(parentIds.length - 1, 1);
+                }
             }
         }
     }

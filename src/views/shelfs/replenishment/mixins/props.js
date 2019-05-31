@@ -1,14 +1,9 @@
 import initStore from "./initStore";
-
 export default {
     props: {
         storex: {
             type: Object,
             default: () => initStore
-        },
-        cargo: {
-            type: Boolean,
-            default: false
         }
     },
 

@@ -57,6 +57,13 @@ export default {
     postShelfApply1(item) {
       this.$router.push(`/shelfs/putaway?id=${item.id}&name=${item.name}`);
     },
+    clickrowleft(row) {
+      this.isEdit = false;
+      this.$nextTick(() => {
+        this.isEdit = true;
+        this.cacheRow = row;
+      });
+    },
     go2add() {
       this.$router.push(`/shelfs/add`);
     },

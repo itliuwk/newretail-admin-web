@@ -98,7 +98,7 @@
 
     const FormContainer = () => import('./form.vue');
 
-    import {FormateYYMMDD ,dateTimeFormateHHmm} from "@/filters/index";
+    import {dateTimeFormate} from "@/filters/index";
 
     export default {
         name: "index",
@@ -137,7 +137,7 @@
                             item.date = '永久有效';
                         } else {
 
-                            item.date = dateTimeFormateHHmm(item.startDate) + ' 至 ' + dateTimeFormateHHmm(item.endDate);
+                            item.date = dateTimeFormate(item.startDate) + ' 至 ' + dateTimeFormate(item.endDate);
                         }
                         return item
                     });
@@ -248,7 +248,7 @@
                 }
             },
             filterCreatedDate(val) {
-                return dateTimeFormateHHmm(val)
+                return dateTimeFormate(val)
             }
         }
     }

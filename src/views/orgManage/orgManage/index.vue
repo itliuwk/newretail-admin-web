@@ -94,6 +94,9 @@
                             <el-table-column
                                     prop="createdDate"
                                     label="创建时间">
+                                <template slot-scope="lists">
+                                    <span>{{lists.row.createdDate |filterCreatedDate}}</span>
+                                </template>
                             </el-table-column>
                         </el-table>
                     </div>
@@ -102,7 +105,7 @@
                                 background
                                 :page-size="listParams.size"
                                 layout="prev, pager, next"
-                                :total="50"
+                                :total="count"
                                 @current-change="currentChange1"
                         >
                         </el-pagination>
@@ -114,6 +117,9 @@
 
         <el-dialog
                 title="新增组织"
+                :show-close="false"
+                :close-on-press-escape="false"
+                :close-on-click-modal="false"
                 :visible.sync="orgOpi"
                 width="400px">
             <el-form ref="ruleForm" :model="form" label-width="100px">
@@ -139,12 +145,10 @@
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="orgOpi = false">取 消</el-button>
+                <el-button @click="orgOptCancel">取 消</el-button>
                 <el-button type="primary" @click="orgOptConfirm" :loading="isLoading">确 定</el-button>
           </span>
         </el-dialog>
-
-
 
 
     </div>
@@ -153,8 +157,15 @@
 <script>
     import {GET_clients, POST_clients, PUT_clients, DETAIL_clients} from '@/api/orgManage'
     import {GET_ACCOUNT_LIST} from '@/api/privilegeManagement'
-    import {dateTimeFormateHHmm} from "@/filters/index";
+    import {dateTimeFormate} from "@/filters/index";
     import {pageSize} from "../../../config";
+
+
+    import {
+        COUNT_ACCOUNT_LIST
+    } from '@/api/privilegeManagement'
+
+    import Alert from "@/utils/alert";
 
     export default {
         data() {
@@ -163,6 +174,7 @@
                 isLoading: false,
                 orgOpiEdit: false,
                 currTreeId: '',
+                count:0,
                 listParams: {
                     size: pageSize,
                     from: 0,
@@ -194,6 +206,7 @@
             currTreeId() {
                 this.DETAIL_clients();
                 this.GET_ACCOUNT_LIST();
+                this.COUNT_ACCOUNT_LIST();
             }
         },
         methods: {
@@ -236,12 +249,18 @@
                 })
             },
 
+            COUNT_ACCOUNT_LIST(){
+                COUNT_ACCOUNT_LIST(this.currTreeId).then(res=>{
+                    this.count = res;
+                })
+            },
+
             /**
              * 成员管理
              */
 
             memberManagement(data) {
-                this.$router.push('/privilegeManagement/account')
+                this.$router.push('/privilegeManagement/account?clientId='+ this.currTreeId)
             },
 
             /**
@@ -268,7 +287,15 @@
                 this.form = this.orgInfo
             },
 
+            /**
+             *
+             * 取消
+             */
 
+            orgOptCancel() {
+                this.orgOpi = false;
+                this.DETAIL_clients()
+            },
 
             /**
              * 确定 新增/编辑 组织
@@ -289,15 +316,22 @@
                             PUT_clients({...obj}).then(res => {
                                 this.orgOpi = false;
                                 this.isLoading = false;
+                                this.GET_clients();
+                                this.DETAIL_clients()
                             }).catch(err => {
                                 this.isLoading = false;
                             })
                         } else {
                             this.form.parentId = this.currTreeId;
                             POST_clients({...this.form}).then(res => {
+
                                 this.orgOpi = false;
                                 this.isLoading = false;
+                                this.GET_clients();
+                                this.DETAIL_clients()
                             }).catch(err => {
+                                Alert.fail('管理员账号不能重复');
+                                console.log(err);
                                 this.isLoading = false;
                             })
 
@@ -310,7 +344,7 @@
         },
         filters: {
             filterCreatedDate(val) {
-                return dateTimeFormateHHmm(val)
+                return dateTimeFormate(val)
             }
         }
     };

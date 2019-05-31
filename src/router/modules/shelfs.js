@@ -10,14 +10,34 @@ const route = {
             component: () => import('@/views/shelfs/list'),
             name: "shelfs_list",
             meta: {
-                title: '货道列表', noCache: false, affix: false
+                title: '货道模板', noCache: false, affix: false
             },
         },
         {
             path: '/shelfs/status',
             component: () => import('@/views/shelfs/status'),
             name: "shelfs_status",
-            meta: { title: '货道状态', noCache: false, affix: false },
+            meta: { title: '设备货道', noCache: false, affix: false },
+        },
+        {
+            path: '/shelfs/replenishment',
+            component: () => import('@/views/shelfs/replenishment'),
+            name: "shelfs_replenishment",
+            meta: { title: '货道补货', noCache: false, affix: false },
+        },
+        {
+            path: '/shelfs/replenishment/quxia',
+            hidden: true,
+            component: () => import('@/views/shelfs/replenishment/quxia'),
+            name: "shelfs_quxia",
+            meta: { title: '货道补货-酒店售货机', noCache: false, affix: false },
+        },
+        {
+            path: '/shelfs/replenishment/quxia-vm',
+            hidden: true,
+            component: () => import('@/views/shelfs/replenishment/quxia-vm'),
+            name: "shelfs_quxia-vm",
+            meta: { title: '货道补货-自助售货机', noCache: false, affix: false },
         },
         {
             path: '/shelfs/detail',

@@ -30,6 +30,13 @@ export function postShelf(params) {
         data: params
     }).then(res => res.data.data)
 }
+export function postShelfvm(params) {
+    return request({
+        url: '/api/admin/shelfs/vm',
+        method: 'post',
+        data: params
+    }).then(res => res.data.data)
+}
 export function deleteShelf(id) {
     return request({
         url: '/api/admin/shelfs',
@@ -41,6 +48,13 @@ export function deleteShelf(id) {
 export function putShelf(params) {
     return request({
         url: `/api/admin/shelfs?id=${params.id}`,
+        method: 'put',
+        data: params
+    }).then(res => res.data.data)
+}
+export function putShelfvm(params) {
+    return request({
+        url: `/api/admin/shelfs/vm?id=${params.id}`,
         method: 'put',
         data: params
     }).then(res => res.data.data)

@@ -104,7 +104,7 @@
         ORDERS_CATEGORIES
     } from '@/api/commodityManagement'
 
-    import {dateTimeFormateHHmm} from "@/filters/index";
+    import {dateTimeFormate} from "@/filters/index";
 
     export default {
         name: "classification",
@@ -283,7 +283,7 @@
         },
         filters: {
             filterCreatedDate(val) {
-                return dateTimeFormateHHmm(val)
+                return dateTimeFormate(val)
             }
         }
     }

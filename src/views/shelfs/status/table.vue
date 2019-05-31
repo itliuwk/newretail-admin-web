@@ -1,6 +1,9 @@
 <template>
   <div class="tableContainer">
-    <header class="btns" style="padding-top:18px;padding-bottom: 18px;">
+    <header
+      class="btns"
+      style="padding-top:18px;padding-bottom: 18px;"
+    >
       <h3>设备列表</h3>
       <div class="smnallbtns">
         <div class="item">
@@ -19,8 +22,14 @@
       :row-class-name="tableRowClassName"
       @row-click="(row)=>{$emit('clickrow',row)}"
     >
-      <el-table-column label="编号" prop="id"></el-table-column>
-      <el-table-column label="名字" prop="name">
+      <el-table-column
+        label="编号"
+        prop="id"
+      ></el-table-column>
+      <el-table-column
+        label="名字"
+        prop="name"
+      >
         <template slot-scope="scope">
           <div
             :to="'/shelfs/detail?id='+scope.row.id"
@@ -28,8 +37,23 @@
           >{{scope.row.name}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="地址" prop="locationName"></el-table-column>
-      <el-table-column label="状态" prop="active">
+      <el-table-column
+        label="地址"
+        prop="locationName"
+      ></el-table-column>
+      <el-table-column
+        label="类型"
+        prop="locationName"
+      >
+        <template slot-scope="scope">
+          <div v-if="scope.row.typeId=='quxia'">酒店售货机</div>
+          <div v-else="!scope.row.typeId=='quxia-vm'">自助售货机</div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="状态"
+        prop="active"
+      >
         <template slot-scope="scope">
           <div v-if="scope.row.active">在线</div>
           <div v-if="!scope.row.active">离线</div>
@@ -38,7 +62,10 @@
       <!-- <el-table-column label="设备数" prop="devices"></el-table-column> -->
     </el-table>
 
-    <div class="paginationContainer" style="padding-top:20px">
+    <div
+      class="paginationContainer"
+      style="padding-top:20px"
+    >
       <el-pagination
         background
         :page-size="dataForm.size"
@@ -71,7 +98,7 @@ export default {
   data() {
     return {};
   },
-  mounted() {},
+  mounted() { },
   methods: {
     ...mapActions(["getDeviceTypes"]),
     tableRowClassName({ row, rowIndex }) {

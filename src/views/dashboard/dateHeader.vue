@@ -34,7 +34,8 @@ export default {
         this.type = "";
         this.$emit("sure", {
           start: dateFormate(value[0]),
-          end: dateFormate(value[1])
+          end: dateFormate(value[1]),
+          siez:10
         });
       } else {
         this.selectTime("today");

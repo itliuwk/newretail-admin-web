@@ -9,6 +9,7 @@
           style="width: 100%"
           @row-click="(row)=>{$emit('selectRow',row)}"
           ref="table"
+          :row-class-name="tableRowClassName"
         >
           <!-- @selection-change="(rows)=>{$emit('selectRow',rows)}" -->
           <el-table-column width="55">
@@ -18,14 +19,24 @@
                   :value="scope.row.checked&&!scope.row.disabled"
                   :checked="scope.row.checked&&!scope.row.disabled"
                   :disabled="scope.row.disabled"
+                  @change="checked_checkbox($event,scope.row,scope.$index)"
                 />
               </div>
             </template>
           </el-table-column>
-          <!-- <el-table-column prop="id" label="编号"></el-table-column> -->
-          <el-table-column prop="name" label="设备"></el-table-column>
+          <el-table-column
+            prop="id"
+            label="编号"
+          ></el-table-column>
+          <el-table-column
+            prop="name"
+            label="设备"
+          ></el-table-column>
           <!-- <el-table-column prop="typeName" label="设备类型"></el-table-column> -->
-          <el-table-column prop="typeName" label="场地地址">
+          <el-table-column
+            prop="typeName"
+            label="场地地址"
+          >
             <template slot-scope="scope">
               <div>{{scope.row.locationName}}</div>
               <div>
@@ -36,13 +47,23 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="groupName" label="分组名称"></el-table-column>
-          <el-table-column prop="typeName" label="设备类型"></el-table-column>
+          <el-table-column
+            prop="groupName"
+            label="分组名称"
+          ></el-table-column>
+          <el-table-column
+            prop="typeName"
+            label="设备类型"
+          ></el-table-column>
           <!-- <el-table-column prop="typeName" label="门状态"></el-table-column> -->
           <!-- <el-table-column prop="createdDate" label="创建时间">
             <template slot-scope="scope">{{scope.row.createdDate|parseTime}}</template>
           </el-table-column>-->
-          <el-table-column prop="active" label="设备状态" width="50">
+          <el-table-column
+            prop="active"
+            label="设备状态"
+            width="50"
+          >
             <template slot-scope="scope">
               <span v-if="!scope.row.active">离线</span>
               <span v-if="scope.row.active">在线</span>
@@ -83,17 +104,28 @@ export default {
     };
   },
   computed: {
-    devices: function() {
+    devices: function () {
       return this.storex.devices;
     },
-    page: function() {
+    page: function () {
       return (
         parseInt(this.storex.formdata.from / this.storex.formdata.size) + 1
       );
     }
   },
-  mounted() {},
-  methods: {}
+  mounted() { },
+  methods: {
+    tableRowClassName({ row, rowIndex }) {
+      if (row.checked) {
+        return 'selected-row';
+      }
+      return 'no-hover';
+    },
+    checked_checkbox(checked, row, index) {
+      // this.$parent.$data.leftTableList[index].checked = !checked;
+      this.$emit('selectRow', row)
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

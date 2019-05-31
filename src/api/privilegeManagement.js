@@ -120,7 +120,7 @@ export function PASSWORD_ACCOUNT_LIST(params) {
  */
 export function COUNT_ACCOUNT_LIST(params) {
     return request({
-        url: "/api/admin/accounts/count",
+        url: "/api/admin/accounts/count?clientId=" + params,
         method: 'get',
         data: params
     }).then(res => res.data.data)

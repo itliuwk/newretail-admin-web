@@ -1,6 +1,11 @@
 
 <template>
-  <el-dialog width="300px" :visible="visible" @open="open" :show-close="false">
+  <el-dialog
+    width="300px"
+    :visible="visible"
+    @open="open"
+    :show-close="false"
+  >
     <div style="padding-top:20px;">
       <el-form
         :inline="false"
@@ -13,24 +18,62 @@
           v-if="editItem.length<=1"
           label="货道号"
           prop="number"
+        >
+          <!--
           :rules="[
         {required: true, message: '不能为空'},{
           validator, trigger: 'blur'
-        }]"
+          }]"-->
+          <el-input
+            v-model="formInline.number"
+            type="number"
+            min="1"
+            :disabled="deviceTypeId!='quxia'"
+            placeholder="货道号"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="价格"
+          prop="price"
+          :rules="[{required: true, message: '不能为空'}]"
         >
-          <el-input v-model="formInline.number" type="number" min="1" placeholder="货道号"></el-input>
+          <el-input
+            v-model="formInline.price"
+            type="number"
+            min=".1"
+            placeholder="价格"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="价格" prop="price" :rules="[{required: true, message: '不能为空'}]">
-          <el-input v-model="formInline.price" type="number" min=".1" placeholder="价格"></el-input>
+        <el-form-item
+          label="安全库存"
+          prop="safeStock"
+          :rules="[{required: true, message: '不能为空'}]"
+        >
+          <el-input
+            v-model="formInline.safeStock"
+            type="number"
+            min="1"
+            placeholder="安全库存"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="安全库存" prop="safeStock" :rules="[{required: true, message: '不能为空'}]">
-          <el-input v-model="formInline.safeStock" type="number" min="1" placeholder="安全库存"></el-input>
-        </el-form-item>
-        <el-form-item label="容量" prop="maxStock" :rules="[{required: true, message: '不能为空'}]">
-          <el-input v-model="formInline.maxStock" type="number" min="1" placeholder="容量"></el-input>
+        <el-form-item
+          label="容量"
+          prop="maxStock"
+          :rules="[{required: true, message: '不能为空'}]"
+        >
+          <el-input
+            v-model="formInline.maxStock"
+            type="number"
+            min="1"
+            placeholder="容量"
+          ></el-input>
         </el-form-item>
 
-        <el-form-item label="商品" prop="productId" :rules="[{required: true, message: '不能为空'}]">
+        <el-form-item
+          label="商品"
+          prop="productId"
+          :rules="[{required: true, message: '不能为空'}]"
+        >
           <!-- :clearable="true" -->
           <el-select
             v-model="formInline.productId"
@@ -47,7 +90,10 @@
               :value="item1.id"
             >
               <div style="display:flex;align-items:center;">
-                <img :src="item1.image" style="width:30px;height:30px;">
+                <img
+                  :src="item1.image"
+                  style="width:30px;height:30px;"
+                >
                 <span style=" color: #8492a6; font-size: 13px;padding-left:10px;">￥{{ item1.price }}</span>
                 <span style="color: #8492a6; font-size: 13px;padding-left:10px;">{{ item1.name }}</span>
               </div>
@@ -57,9 +103,15 @@
       </el-form>
     </div>
 
-    <div slot="footer" class="dialog-footer">
+    <div
+      slot="footer"
+      class="dialog-footer"
+    >
       <el-button @click="$emit('update:visible',false)">取消</el-button>
-      <el-button type="primary" @click="sure">确定</el-button>
+      <el-button
+        type="primary"
+        @click="sure"
+      >确定</el-button>
     </div>
   </el-dialog>
 </template>
@@ -67,6 +119,8 @@
 import { GET_LIST } from "../../../api/commodityManagement";
 import { mergeArray } from "../../../utils/lodash";
 import { clone } from "@/filters";
+import myalert from "../../../utils/alert";
+import { DEVICE_TYPE_SMALL } from '../../../config';
 export default {
   props: ["visible", "editItem"],
   data() {
@@ -85,8 +139,12 @@ export default {
         query: "",
         from: "",
         size: 10
-      }
+      },
+      deviceTypeId: DEVICE_TYPE_SMALL
     };
+  },
+  mounted() {
+    this.init()
   },
   methods: {
     //验证 number
@@ -104,18 +162,39 @@ export default {
         callback();
       }
     },
-    open() {
+    init() {
+      this.deviceTypeId = this.$parent.deviceTypeId
       if (this.$data.products.length <= 0) {
         this.remoteMethod();
       }
-      if (this.editItem.length >= 0) {
+      if (this.editItem.length > 1) {
+        //如果是多选 进来选择都为空
+        this.$data.cacheItemCopy = clone({});
+        this.$data.formInline = clone({});
+      } else {
         this.$data.cacheItemCopy = clone(this.editItem[0]);
         this.$data.formInline = clone(this.editItem[0]);
       }
     },
+    open() {
+
+    },
     finish() {
-      this.$emit("update:visible", false);
       this.$emit("finish", this.$data.formInline);
+    },
+    isExitNumberInArray() {
+      var array = this.$parent.$data.detail.shelfs;
+      var exit = false;
+      var self = this;
+      for (var item of array) {
+        for (var item1 of item.items) {
+          if (item1.number == self.formInline.number) {
+            exit = true;
+            break;
+          }
+        }
+      }
+      return exit;
     },
     sure() {
       var self = this;
@@ -165,7 +244,7 @@ export default {
     }
   },
 
-  mounted() {}
+
 };
 </script>
 

@@ -33,6 +33,7 @@
 <script>
     import logoSrc from '@/assets/quxia.png'
     import { getCookie } from "../../../../utils/cookie";
+    import { mapState, mapActions } from "vuex";
     export default {
         data(){
           return{
@@ -45,6 +46,9 @@
             this.user = JSON.parse(LoginByUsername).username
         },
         methods: {
+            ...mapActions([
+                "delAllVisitedViews"
+            ]),
             getCookie(name) {
                 let arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
                 if (arr = document.cookie.match(reg)){
@@ -61,6 +65,7 @@
                 if (Cookie != null) {
                     document.cookie = 'access_token' + "=" + Cookie + ";expires=" + exp.toGMTString();
                 }
+                this.delAllVisitedViews();
                 setTimeout(() => {
                     this.$router.push('/login')
                 }, 100)

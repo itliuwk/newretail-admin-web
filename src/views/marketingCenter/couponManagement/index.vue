@@ -174,7 +174,7 @@
 
     import Alert from "@/utils/alert";
     import {pageSize} from '../../../config';
-    import {FormateYYMMDD, dateTimeFormateHHmm} from "@/filters/index";
+    import {FormateYYMMDD, dateTimeFormate} from "@/filters/index";
 
     const FormContainer = () => import('./form.vue');
     const CouponDetails = () => import('./couponDetails.vue');
@@ -459,7 +459,7 @@
                 }
             },
             filterCreatedDate(val) {
-                return dateTimeFormateHHmm(val)
+                return dateTimeFormate(val)
             }
         }
     }

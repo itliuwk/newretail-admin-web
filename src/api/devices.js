@@ -50,6 +50,8 @@ export function GET_DEVICE_DETAIL(params) {
     }).then(res => res.data.data)
 }
 
+
+
 export function UPDATE_DEVICE(params) {
     return request({
         url: `/api/admin/devices/update?id=${params.id}`,

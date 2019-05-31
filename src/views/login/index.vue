@@ -18,7 +18,7 @@
         </span>
         <el-input
           v-model="loginForm.username"
-          :placeholder="'username'"
+          :placeholder="'请输入用户名'"
           name="username"
           type="text"
           auto-complete="on"
@@ -32,7 +32,7 @@
         <el-input
           v-model="loginForm.password"
           :type="passwordType"
-          :placeholder="'password'"
+          :placeholder="'请输入密码'"
           name="password"
           auto-complete="on"
           @keyup.enter.native="handleLogin"

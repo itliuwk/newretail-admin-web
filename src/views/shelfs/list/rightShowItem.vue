@@ -1,14 +1,20 @@
 
 <template>
+  <!-- @mouseleave="mouseleave(item)"
+  @mouseover="mouseover(item)"-->
   <div
     class="listItem"
     :key="item.id"
-    @mouseleave="mouseleave(item)"
-    @mouseover="mouseover(item)"
     @click="selectItems(item)"
   >
-    <div class="editBtns" v-if="item.isEdit||isSelect">
-      <div class="center" v-if="editItem.length<=1">
+    <div
+      class="editBtns"
+      v-if="item.isEdit||isSelect"
+    >
+      <div
+        class="center"
+        v-if="editItem.length<=1"
+      >
         <el-button @click="go2edit(item,$event)">编辑</el-button>
       </div>
       <svg-icon
@@ -18,8 +24,13 @@
         v-if="editItem.length<=1"
       ></svg-icon>
     </div>
+    <!-- 图片显示 -->
     <div>
-      <img class="left img" :src="item.image" alt>
+      <img
+        class="left img"
+        :src="item.image"
+        alt
+      >
     </div>
 
     <div class="right">
@@ -34,7 +45,10 @@
           <div class="item2">￥{{item.price}}</div>
         </div>
       </div>
-      <div style="padding-top:10px;" class="rows">
+      <div
+        style="padding-top:10px;"
+        class="rows"
+      >
         <div class="rowItem">
           <div class="item1">容量:</div>
           <div class="item2">{{item.maxStock}}</div>
@@ -50,7 +64,7 @@
 <script>
 import myalert from "../../../utils/alert";
 export default {
-  props: ["visible", "item", "visiblerpoduct", "editItem"],
+  props: ["visible", "item", "visiblerpoduct", "editItem", "isSmallType"],
   computed: {
     isSelect() {
       return this.editItem.filter(item1 => item1.number == this.item.number)
@@ -59,11 +73,11 @@ export default {
   },
   methods: {
     deleteShelf1(item, e) {
+      e.stopPropagation();
       var self = this;
       myalert.confirm("确定要删除吗？").then(res => {
         self.$emit("deleteItem", item);
       });
-      e.stopPropagation();
     },
     mouseover(item) {
       item.isEdit = true;
@@ -73,8 +87,8 @@ export default {
     },
     go2edit(item, e) {
       item.isEdit = false;
-      this.$emit("selectItem", item);
       this.$emit("update:visible", true);
+      this.$emit("goEdit", item);
       e.stopPropagation();
     },
     selectItems(item) {
@@ -84,12 +98,22 @@ export default {
         item1 => item1.number == item.number
       );
       if (_index >= 0) {
+        //修改 shelfs item的方法不一样
+        if (this.isSmallType) {
+          if (this.$parent.detail.shelfs[item.number - 1]) {
+            this.$parent.detail.shelfs[item.number - 1].isEdit = false;
+          }
+        } else {
+          this.$parent.detail.shelfs[item.uuid.split(":")[0]].items[
+            item.uuid.split(":")[1]
+          ].isEdit = false;
+        }
+
         this.editItem.splice(_index, 1);
       } else {
         this.editItem.push(item);
       }
-
-      this.$emit("update:editItem", this.editItem);
+      this.$emit("selectItem", this.editItem);
     }
   }
 };
@@ -155,6 +179,21 @@ export default {
       max-width: 80px;
       padding: 0px;
     }
+  }
+}
+
+// header1
+.header1 {
+  display: flex;
+  align-items: flex-end;
+  padding: 10px;
+
+  h2 {
+  }
+
+  .el-input-number {
+    margin-right: 10px;
+    margin-left: 10px;
   }
 }
 </style>
