@@ -7,3 +7,5 @@ export function downLoad(url) {
     oA.click();
     oA.remove(); // 下载之后把创建的元素删除
 }
+
+//https://quxiaapi.renqilai.com/api/qiniu/upToken    https://cdn.renqilai.com/${data.key}
