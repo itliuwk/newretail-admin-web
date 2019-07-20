@@ -3,7 +3,7 @@ var qiniu = require('qiniu-js')
 import { getTimeForQiniu } from './date'
 export function getQiniuToken() {
     return request({
-        url: 'https://quxiaapi.renqilai.com/api/qiniu/upToken',
+        url: '',
         method: 'post',
         // params
     }).then(res => res.data.data).catch(e => {
@@ -33,7 +33,7 @@ export async function uploadQinuImage(file) {
                 reject(data)
             },
             complete(data) {
-                data.path = `https://cdn.renqilai.com/${data.key}`
+                data.path = ``
                 resolve(data)
             }
         }) // 上传开始
