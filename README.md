@@ -25,3 +25,6 @@
 <img src="https://github.com/liuwkgithub/newretail-admin-web/blob/master/src/assets/images/%E8%B4%A7%E9%81%93%E5%88%97%E8%A1%A8.png?raw=true"  alt=""/>
 
  
+
+
+#  此项目模板来自：  https://github.com/PanJiaChen
