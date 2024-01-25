@@ -26,7 +26,7 @@
     "lodash.map": "^4.6.0",
     "lodash.sortby": "^4.7.0",
     "mockjs": "^1.0.1-beta3",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
     "qiniu-js": "^2.5.4",
