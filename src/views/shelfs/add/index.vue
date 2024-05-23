@@ -623,7 +623,7 @@ header {
       flex-wrap: wrap;
       padding: 0 20px;
       .listItem {
-        width: calc(33.33%-20px);
+        width: calc(33.33% - 20px);
         margin-right: 20px;
       }
     }
@@ -637,7 +637,7 @@ header {
   flex-wrap: wrap;
   padding: 0 20px;
   .listItem {
-    width: calc(33.33%-20px);
+    width: calc(33.33% - 20px);
     margin-right: 20px;
   }
 }

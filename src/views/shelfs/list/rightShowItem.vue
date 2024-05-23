@@ -122,7 +122,7 @@ export default {
 .listItem {
   box-sizing: border-box;
   display: inline-block;
-  width: calc(50%-20px);
+  width: calc(50% - 20px);
   border: 1px solid #ddd;
   display: flex;
   padding: 10px;

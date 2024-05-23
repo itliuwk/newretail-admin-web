@@ -21,7 +21,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .card {
-  width: calc(25%-20px);
+  width: calc(25% - 20px);
   border: 1px solid #ddd;
   height: 100px;
   border-radius: 5px;
@@ -43,7 +43,7 @@ export default {
   }
   @media screen and (max-width: 800px) {
     & {
-      width: calc(50%-20px);
+      width: calc(50% - 20px);
       margin-bottom: 10px;
     }
   }

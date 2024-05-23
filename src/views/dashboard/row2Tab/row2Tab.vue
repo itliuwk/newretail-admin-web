@@ -151,7 +151,7 @@ export default {
     padding-bottom: 10px;
     display: flex;
     .left {
-      width: calc(66.6%-10px);
+      width: calc(66.6% - 10px);
       margin-right: 10px;
     }
     .right {

@@ -278,7 +278,7 @@ export default {
     .itemContainer {
       cursor: pointer;
       margin-right: 20px;
-      width: calc(12.5%-20px);
+      width: calc(12.5% - 20px);
       background: #fff;
       margin-bottom: 20px;
       border-radius: 5px;
@@ -316,7 +316,7 @@ export default {
         }
       }
       @media screen and (max-width: 1200px) {
-        width: calc(20%-20px);
+        width: calc(20% - 20px);
         &:nth-child(8n) {
           margin-right: 20px;
         }
@@ -325,7 +325,7 @@ export default {
         }
       }
       @media screen and (max-width: 600px) {
-        width: calc(33.33%-20px);
+        width: calc(33.33% - 20px);
         &:nth-child(8n) {
           margin-right: 20px;
         }

@@ -27,7 +27,7 @@ export default {
 <style lang="scss" scoped>
 .card {
   background: #fff;
-  width: calc(33.33%-20px);
+  width: calc(33.33% - 20px);
   /* border: 1px solid #eee; */
   border-radius: 5px;
   margin-right: 20px;
@@ -43,7 +43,7 @@ export default {
   }
   @media screen and (max-width: 800px) {
     & {
-      width: calc(50%-20px);
+      width: calc(50% - 20px);
       margin-bottom: 10px;
     }
   }

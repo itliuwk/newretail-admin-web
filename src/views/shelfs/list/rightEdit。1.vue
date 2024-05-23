@@ -205,7 +205,7 @@ header {
   .listItem {
     box-sizing: border-box;
     display: inline-block;
-    width: calc(50%-20px);
+    width: calc(50% - 20px);
     border: 1px solid #ddd;
     display: flex;
     padding: 10px;
@@ -224,7 +224,7 @@ header {
 .listItem.add {
   margin-left: 20px;
   margin-right: 20px;
-  width: calc(100%-60px);
+  width: calc(100% - 60px);
   display: flex;
   align-items: center;
   justify-content: center;

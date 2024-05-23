@@ -119,7 +119,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   .item {
-    width: calc(50%-20px);
+    width: calc(50% - 20px);
     margin-bottom: 20px;
     margin-right: 20px;
     background: #fff;
